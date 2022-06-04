@@ -24,7 +24,7 @@ class FeedViewController: UIViewController {
         button.backgroundColor = .white
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 10
-        button.addTarget(nil, action: #selector(tapPostButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapPostButton), for: .touchUpInside)
                 
         view.addSubview(button)
         

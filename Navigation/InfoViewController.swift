@@ -24,7 +24,7 @@ class InfoViewController: UIViewController {
         button.backgroundColor = .systemPink
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
-        button.addTarget(nil, action: #selector(tapAlertButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapAlertButton), for: .touchUpInside)
                 
         view.addSubview(button)
         

@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let tabBarController = UITabBarController()
         tabBarController.tabBar.backgroundColor = .white
-        tabBarController.viewControllers = [profileNC, feedNC]
+        tabBarController.viewControllers = [feedNC, profileNC]
         
         // activate main window
         window = UIWindow(frame: UIScreen.main.bounds)
