@@ -14,26 +14,35 @@ class FeedViewController: UIViewController {
 
         view.backgroundColor = .systemTeal
         
-        createPostButton()
+        createSubView()
     }
     
-    private func createPostButton() {
+    private func createSubView() {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        view.addSubview(stackView)
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            stackView.heightAnchor.constraint(equalToConstant: 200),
+            stackView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor, constant: -32)
+        ])
+        addPostButton(title: "Post number 1", color: .systemPurple, to: stackView, selector: #selector(tapPostButton))
+        addPostButton(title: "Post number 2", color: .systemIndigo, to: stackView, selector: #selector(tapPostButton))
+    }
+    
+    private func addPostButton(title: String, color: UIColor, to view: UIStackView, selector: Selector) {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Post", for: .normal)
-        button.backgroundColor = .white
-        button.setTitleColor(.black, for: .normal)
-        button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(tapPostButton), for: .touchUpInside)
-                
-        view.addSubview(button)
-        
-        NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-            button.heightAnchor.constraint(equalToConstant: 50),
-            button.widthAnchor.constraint(equalToConstant: 100)
-        ])
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = color
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 12
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        view.addArrangedSubview(button)
     }
     
     @objc func tapPostButton() {

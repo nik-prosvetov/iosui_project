@@ -10,23 +10,27 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     let profileHeaderView = ProfileHeaderView()
-
+    
+    // MARK: - Setup section
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .lightGray
         
-        view.addSubview(profileHeaderView)
+        setupProfileHeaderView()
     }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        // setup profile header
-        let x = view.safeAreaInsets.left
-        let y = view.safeAreaInsets.top
-        let width = view.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right
-        let height = view.bounds.height
-        profileHeaderView.setup(frame: CGRect(x: x, y: y, width: width, height: height))
+
+    private func setupProfileHeaderView() {
+        // add profile header view
+        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(profileHeaderView)
+        NSLayoutConstraint.activate([
+            profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            profileHeaderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            profileHeaderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
+        ])
+        profileHeaderView.setup()
     }
 }
