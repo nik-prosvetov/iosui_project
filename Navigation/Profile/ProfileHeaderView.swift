@@ -30,7 +30,6 @@ class ProfileHeaderView: UIView {
     }
     
     private func setupNameLabel() {
-//        fullNameLabel.frame = CGRect(x: 160, y: 16, width: 128, height: 32)
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
         fullNameLabel.text = "Teo West"
         fullNameLabel.font = .boldSystemFont(ofSize: 18)
