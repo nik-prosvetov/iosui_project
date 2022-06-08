@@ -7,14 +7,14 @@
 
 import UIKit
 
-class PostViewController: UIViewController {
+final class PostViewController: UIViewController {
     
     var post: Post?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = post?.title ?? "-"
+        title = post?.author ?? "-"
         view.backgroundColor = .systemYellow
         
         // add a button in the navigtion bar

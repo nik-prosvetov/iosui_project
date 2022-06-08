@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // create tab bar with feed and profile items
-        let profileVC = ProfileViewController()
-        let profileNC = UINavigationController(rootViewController: profileVC)
+        let loginVC = LoginViewController()
+        let profileNC = UINavigationController(rootViewController: loginVC)
         profileNC.tabBarItem = UITabBarItem(title: "Profile",
                                             image: UIImage(systemName: "person.crop.circle"),
                                             selectedImage: UIImage(systemName: "person.crop.circle.fill"))
@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let tabBarController = UITabBarController()
         tabBarController.tabBar.backgroundColor = .white
-        tabBarController.viewControllers = [feedNC, profileNC]
+        tabBarController.viewControllers = [profileNC, feedNC]
         
         // activate main window
         window = UIWindow(frame: UIScreen.main.bounds)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+final class ProfileHeaderView: UITableViewHeaderFooterView {
     
     // MARK: Visual objects
     
@@ -20,13 +20,21 @@ class ProfileHeaderView: UIView {
     private var statusText = "Ready to help"
     
     // MARK: - Setup section
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         
-    func setup() {
         setupAvatarImage()
         setupNameLabel()
         setupStatusLabel()
         setupStatusTextField()
         setupStatusButton()
+        
+        statusTextField.delegate = self
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("lol")
     }
     
     private func setupNameLabel() {
@@ -98,7 +106,7 @@ class ProfileHeaderView: UIView {
     private func setupStatusButton() {
         setStatusButton.translatesAutoresizingMaskIntoConstraints = false
         setStatusButton.backgroundColor = .systemBlue
-        setStatusButton.layer.cornerRadius = 12
+        setStatusButton.layer.cornerRadius = LayoutConstants.cornerRadius
         setStatusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
         setStatusButton.layer.shadowColor = UIColor.black.cgColor
         setStatusButton.layer.shadowRadius = 4
@@ -124,5 +132,16 @@ class ProfileHeaderView: UIView {
     
     @objc func statusButtonPressed() {
         statusLabel.text = statusText
+    }
+}
+
+// MARK: - Extension
+
+extension ProfileHeaderView: UITextFieldDelegate {
+    
+    // tap 'done' on the keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

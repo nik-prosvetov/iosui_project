@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InfoViewController: UIViewController {
+final class InfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class InfoViewController: UIViewController {
         button.setTitle("Alert", for: .normal)
         button.backgroundColor = .systemPink
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = LayoutConstants.cornerRadius
         button.addTarget(self, action: #selector(tapAlertButton), for: .touchUpInside)
                 
         view.addSubview(button)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FeedViewController: UIViewController {
+final class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,13 +40,13 @@ class FeedViewController: UIViewController {
         button.setTitle(title, for: .normal)
         button.backgroundColor = color
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = LayoutConstants.cornerRadius
         button.addTarget(self, action: selector, for: .touchUpInside)
         view.addArrangedSubview(button)
     }
     
     @objc func tapPostButton() {
-        let post = Post(title: "Hello world!")
+        let post = postExamples[0]
         
         let postVC = PostViewController()
         postVC.post = post
