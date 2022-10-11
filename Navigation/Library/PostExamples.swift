@@ -2,8 +2,6 @@
 //  PostExamples.swift
 //  Navigation
 //
-//  Created by Serge Kotov on 08.06.2022.
-//
 
 let postExamples: [Post] = [
     Post(author: "Kat Vadam",
