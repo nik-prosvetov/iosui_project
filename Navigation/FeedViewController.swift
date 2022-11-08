@@ -28,8 +28,8 @@ final class FeedViewController: UIViewController {
             stackView.heightAnchor.constraint(equalToConstant: 200),
             stackView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor, constant: -32)
         ])
-        addPostButton(title: "Post number 1", color: .systemPurple, to: stackView, selector: #selector(tapPostButton))
-        addPostButton(title: "Post number 2", color: .systemIndigo, to: stackView, selector: #selector(tapPostButton))
+        addPostButton(title: "Post number One", color: .systemPurple, to: stackView, selector: #selector(tapPostButton))
+        addPostButton(title: "Post number Two", color: .systemIndigo, to: stackView, selector: #selector(tapPostButton))
     }
     
     private func addPostButton(title: String, color: UIColor, to view: UIStackView, selector: Selector) {
