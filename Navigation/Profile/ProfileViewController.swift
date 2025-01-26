@@ -6,6 +6,7 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
+    var user: User?
     
     static let headerIdent = "header"
     static let photoIdent = "photo"
@@ -20,13 +21,9 @@ final class ProfileViewController: UIViewController {
         return table
     }()
     
-    // MARK: - Setup section
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .systemBackground
-        
         view.addSubview(Self.postTableView)
         setupConstraints()
         Self.postTableView.dataSource = self
@@ -43,17 +40,14 @@ final class ProfileViewController: UIViewController {
             Self.postTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-
+    
     @objc func reloadTableView() {
         Self.postTableView.reloadData()
         Self.postTableView.refreshControl?.endRefreshing()
     }
 }
 
-// MARK: - Extensions
-
 extension ProfileViewController: UITableViewDataSource {
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
@@ -63,14 +57,13 @@ extension ProfileViewController: UITableViewDataSource {
             return 1
         }
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
 }
 
 extension ProfileViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
@@ -85,17 +78,20 @@ extension ProfileViewController: UITableViewDelegate {
             return UITableViewCell()
         }
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard section == 0 else { return nil }
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: Self.headerIdent) as! ProfileHeaderView
+        if let user = user {
+            headerView.updateUser(user)
+        }
         return headerView
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 220 : 0
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
@@ -111,4 +107,6 @@ extension ProfileViewController: UITableViewDelegate {
         }
     }
 }
+
+
 

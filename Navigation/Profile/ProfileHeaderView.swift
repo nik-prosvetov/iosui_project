@@ -6,9 +6,6 @@
 import UIKit
 
 final class ProfileHeaderView: UITableViewHeaderFooterView {
-    
-    // MARK: Visual objects
-    
     var fullNameLabel = UILabel()
     var avatarImageView = UIImageView()
     var statusLabel = UILabel()
@@ -20,20 +17,16 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
     private var statusText = "Ready to help"
     private var avatarOriginPoint = CGPoint()
     
-    // MARK: - Setup section
-    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        
         setupNameLabel()
         setupStatusLabel()
         setupStatusTextField()
         setupStatusButton()
         setupAvatarImage()
-        
         statusTextField.delegate = self
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("lol")
     }
@@ -70,7 +63,6 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
         statusTextField.translatesAutoresizingMaskIntoConstraints = false
         statusTextField.textColor = .darkGray
         statusTextField.backgroundColor = .white
-        
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         statusTextField.leftView = paddingView
         statusTextField.leftViewMode = .always
@@ -117,14 +109,12 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
         avatarImageView.layer.borderColor = UIColor.white.cgColor
         avatarImageView.clipsToBounds = true
         
-        // add a tap gesture
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOnAvatar))
         tapGesture.numberOfTapsRequired = 1
         tapGesture.numberOfTouchesRequired = 1
         avatarImageView.isUserInteractionEnabled = true
         avatarImageView.addGestureRecognizer(tapGesture)
         
-        // cancel an animation mode
         returnAvatarButton.translatesAutoresizingMaskIntoConstraints = false
         returnAvatarButton.alpha = 0
         returnAvatarButton.backgroundColor = .clear
@@ -133,7 +123,6 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
         returnAvatarButton.tintColor = .black
         returnAvatarButton.addTarget(self, action: #selector(returnAvatarToOrigin), for: .touchUpInside)
         
-        // translucent background for the modal animation mode
         avatarBackground = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         avatarBackground.backgroundColor = .darkGray
         avatarBackground.isHidden = true
@@ -152,8 +141,6 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
         ])
     }
     
-    // MARK: - Event handlers
-    
     @objc private func statusTextChanged(_ textField: UITextField) {
         statusText = textField.text ?? ""
     }
@@ -163,7 +150,6 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
     }
     
     @objc private func didTapOnAvatar() {
-        // create an animation
         avatarImageView.isUserInteractionEnabled = false
         
         ProfileViewController.postTableView.isScrollEnabled = false
@@ -201,13 +187,16 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
             self.avatarImageView.isUserInteractionEnabled = true
         }
     }
+    
+    func updateUser(_ user: User) {
+        fullNameLabel.text = user.fullName
+        statusLabel.text = user.status
+        avatarImageView.image = user.avatar
+        statusText = user.status
+    }
 }
 
-// MARK: - Extension
-
 extension ProfileHeaderView: UITextFieldDelegate {
-    
-    // tap 'done' on the keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
